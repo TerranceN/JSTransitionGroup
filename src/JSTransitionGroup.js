@@ -7,8 +7,6 @@ var animLoop;
 
 var transitionGroups = [];
 
-console.log('load');
-
 var requestAnimationFrame = function(callback, delay = 0) {
   if (typeof window.requestAnimationFrame !== 'undefined') {
     window.requestAnimationFrame(callback);
@@ -18,7 +16,6 @@ var requestAnimationFrame = function(callback, delay = 0) {
 }
 
 var animFunction = function() {
-  console.log('anim');
   for (var i = 0; i < transitionGroups.length; i++) {
     transitionGroups[i].update();
   }
@@ -218,17 +215,13 @@ var JSTransitionGroup = React.createClass({
       style: this.getStyle(key),
       className: cx(oldElem.props.className, extraClasses)
     });
-    if (this.state.animState[key]) {
-      return (
-        <JSTransitionGroupElement
-          key={key}
-          element={elem}
-          onElementRemoved={this.onElementRemoved}
-          />
-      );
-    } else {
-      return null;
-    }
+    return (
+      <JSTransitionGroupElement
+        key={key}
+        element={elem}
+        onElementRemoved={this.onElementRemoved}
+        />
+    );
   },
 
   render() {
@@ -262,3 +255,5 @@ var JSTransitionGroup = React.createClass({
     );
   }
 });
+
+module.exports = JSTransitionGroup;
